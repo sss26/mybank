@@ -5,7 +5,7 @@ import com.smthasa.mybank.service.TransactionService;
 
 public class Application {
 
-	public static final ObjectMapper MAPPER = new ObjectMapper();
-	public static final TransactionService TRANSACTION_SERVICE = new TransactionService();
+    public static final ObjectMapper MAPPER = new ObjectMapper();
+    public static final TransactionService TRANSACTION_SERVICE = new TransactionService();
 
 }

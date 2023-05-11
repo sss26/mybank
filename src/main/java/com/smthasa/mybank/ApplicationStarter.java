@@ -8,18 +8,25 @@ import org.apache.catalina.startup.Tomcat;
 import com.smthasa.mybank.web.MyBankServlet;
 
 public class ApplicationStarter {
-	public static void main(String[] args) throws LifecycleException {
 
-		Tomcat tomcat = new Tomcat();
-		tomcat.setPort(8080);
+    public static void main(String[] args) throws LifecycleException {
+
+        int serverPort = 8080;
+        String portProperty = System.getProperty("server.port");
+        if (portProperty != null) {
+            serverPort = Integer.parseInt(portProperty);
+        }
+
+        Tomcat tomcat = new Tomcat();
+        tomcat.setPort(serverPort);
         tomcat.getConnector();
 
         Context ctx = tomcat.addContext("", null);
-        Wrapper servlet = Tomcat.addServlet(ctx, "myFirstServlet", new MyBankServlet());
+        Wrapper servlet = Tomcat.addServlet(ctx, "myBankServlet", new MyBankServlet());
 
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/*");
 
         tomcat.start();
-	}
+    }
 }
