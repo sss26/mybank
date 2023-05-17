@@ -10,18 +10,20 @@ public class Transaction {
     private int amount;
     private String timeStamp;
     private String reference;
+    private String slogan;
 
     public Transaction() {
 
     }
 
-    public Transaction(String id, int amount, String reference) {
+    public Transaction(String id, int amount, String reference, String slogan) {
         this.id = id;
         this.amount = amount;
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm");
         df.setTimeZone(TimeZone.getTimeZone("PST"));
         this.timeStamp = df.format(new Date());
         this.reference = reference;
+        this.slogan = slogan;
     }
 
     public String getId() {
@@ -40,6 +42,10 @@ public class Transaction {
         return reference;
     }
 
+    public String getSlogan() {
+        return slogan;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -54,6 +60,10 @@ public class Transaction {
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public void setSlogan(String slogan) {
+        this.slogan = slogan;
     }
 
 }
