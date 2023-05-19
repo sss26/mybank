@@ -4,16 +4,13 @@
   <artifactId>mybank</artifactId>
   <version>1.0-SNAPSHOT</version>
   
-  <!--choose version of Java for maven bompiler to use (17)-->
   <properties>
 	<maven.compiler.source>17</maven.compiler.source>
 	<maven.compiler.target>17</maven.compiler.target>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
-  <!--Get tomcat-->
   <dependencies>
-    <!-- Embed Tomcat into generated jar file to allow creation of servlets -->
     <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-core</artifactId>
@@ -25,27 +22,30 @@
       <version>2.13.0</version>
     </dependency>
     <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.13.0</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>5.3.10</version>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   
-  <!-- Need 2 maven plugins - 1 shade plugin (imports all dependencies) -->
   <build>
     <plugins>
-      <!-- Maven compiler plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
       </plugin>
-      <!-- Maven shade plug (imports all downstream dependencies) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -59,7 +59,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.smthasa.mybank.ApplicationStarter</mainClass>
+                  <mainClass>com.smthasa.mybank.ApplicationLauncher</mainClass>
                 </transformer>
               </transformers>
             </configuration>

@@ -5,10 +5,9 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.startup.Tomcat;
 
-import com.smthasa.mybank.web.MyBankServlet;
+import com.smthasa.mybank.web.TransactionServlet;
 
-public class ApplicationStarter {
-
+public class ApplicationLauncher {
     public static void main(String[] args) throws LifecycleException {
 
         int serverPort = 8080;
@@ -22,7 +21,7 @@ public class ApplicationStarter {
         tomcat.getConnector();
 
         Context ctx = tomcat.addContext("", null);
-        Wrapper servlet = Tomcat.addServlet(ctx, "myBankServlet", new MyBankServlet());
+        Wrapper servlet = Tomcat.addServlet(ctx, "transactionServlet", new TransactionServlet());
 
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/*");

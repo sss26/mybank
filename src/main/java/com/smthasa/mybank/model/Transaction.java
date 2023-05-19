@@ -1,27 +1,32 @@
 package com.smthasa.mybank.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Transaction {
 
     private String id;
-    private int amount;
-    private String timeStamp;
+
+    private BigDecimal amount;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mmZ")
+    private ZonedDateTime timestamp;
+
     private String reference;
+
     private String slogan;
 
     public Transaction() {
 
     }
 
-    public Transaction(String id, int amount, String reference, String slogan) {
-        this.id = id;
+    public Transaction(BigDecimal amount, ZonedDateTime timestamp, String reference, String slogan) {
+        this.id = UUID.randomUUID().toString();
         this.amount = amount;
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-        df.setTimeZone(TimeZone.getTimeZone("PST"));
-        this.timeStamp = df.format(new Date());
+        this.timestamp = timestamp;
         this.reference = reference;
         this.slogan = slogan;
     }
@@ -30,12 +35,12 @@ public class Transaction {
         return id;
     }
 
-    public int getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public ZonedDateTime getTimestamp() {
+        return timestamp;
     }
 
     public String getReference() {
@@ -50,12 +55,12 @@ public class Transaction {
         this.id = id;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimestamp(ZonedDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setReference(String reference) {

@@ -6,15 +6,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.smthasa.mybank.ApplicationStarter;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.smthasa.mybank.ApplicationLauncher;
 
 @Configuration
-@ComponentScan(basePackageClasses = ApplicationStarter.class)
+@ComponentScan(basePackageClasses = ApplicationLauncher.class)
 @PropertySource("classpath:/application.properties")
-public class MyBankSpringConfiguration {
+public class MyBankConfiguration {
 
     @Bean
     public ObjectMapper getObjectMapperBean() {
-        return new ObjectMapper();
+        return new ObjectMapper().registerModule(new JavaTimeModule());
     }
+
 }
