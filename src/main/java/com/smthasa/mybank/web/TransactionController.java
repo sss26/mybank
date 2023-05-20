@@ -1,13 +1,13 @@
 package com.smthasa.mybank.web;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smthasa.mybank.dto.TransactionDto;
 import com.smthasa.mybank.model.Transaction;
 import com.smthasa.mybank.service.TransactionService;
 
@@ -27,9 +27,8 @@ public class TransactionController {
     }
 
     @PostMapping("/transactions")
-    public Transaction createTransaction(@RequestParam double amount, @RequestParam String reference) {
-        BigDecimal bigAmount = BigDecimal.valueOf(amount);
-        Transaction transaction = transactionService.create(bigAmount, reference);
+    public Transaction createTransaction(@RequestBody TransactionDto transactionDto) {
+        Transaction transaction = transactionService.create(transactionDto.getAmount(), transactionDto.getReference());
         return transaction;
     }
 }
