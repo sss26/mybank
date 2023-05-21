@@ -16,7 +16,7 @@ import com.smthasa.mybank.service.TransactionService;
 @RestController
 public class TransactionController {
 
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
@@ -24,13 +24,11 @@ public class TransactionController {
 
     @GetMapping("/transactions")
     public List<Transaction> getTransactions() {
-        List<Transaction> transactions = transactionService.findAll();
-        return transactions;
+        return transactionService.findAll();
     }
 
     @PostMapping("/transactions")
     public Transaction createTransaction(@RequestBody @Valid TransactionDto transactionDto) {
-        Transaction transaction = transactionService.create(transactionDto.getAmount(), transactionDto.getReference());
-        return transaction;
+        return transactionService.create(transactionDto.getAmount(), transactionDto.getReference());
     }
 }
