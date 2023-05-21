@@ -2,6 +2,8 @@ package com.smthasa.mybank.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +29,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transactions")
-    public Transaction createTransaction(@RequestBody TransactionDto transactionDto) {
+    public Transaction createTransaction(@RequestBody @Valid TransactionDto transactionDto) {
         Transaction transaction = transactionService.create(transactionDto.getAmount(), transactionDto.getReference());
         return transaction;
     }
