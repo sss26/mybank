@@ -1,11 +1,11 @@
-package com.smthasa.mybank.dto;
+package com.smthasa.mybank.web.forms;
 
 import java.math.BigDecimal;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class TransactionDto {
+public class TransactionForm {
 
     @NotNull
     private BigDecimal amount;
@@ -16,6 +16,10 @@ public class TransactionDto {
     @NotBlank
     private String receivingUser;
 
+    public String getReceivingUser() {
+        return receivingUser;
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -24,8 +28,8 @@ public class TransactionDto {
         return reference;
     }
 
-    public String getReceivingUser() {
-        return receivingUser;
+    public void setReceivingUser(String receivingUser) {
+        this.receivingUser = receivingUser;
     }
 
     public void setAmount(BigDecimal amount) {
@@ -34,10 +38,6 @@ public class TransactionDto {
 
     public void setReference(String reference) {
         this.reference = reference;
-    }
-
-    public void setReceivingUser(String receivingUser) {
-        this.receivingUser = receivingUser;
     }
 
 }

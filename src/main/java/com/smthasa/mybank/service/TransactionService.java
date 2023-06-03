@@ -2,6 +2,7 @@ package com.smthasa.mybank.service;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -25,9 +26,19 @@ public class TransactionService {
         return transactions;
     }
 
-    public Transaction create(BigDecimal amount, String reference) {
+    public List<Transaction> findByReceivingUserId(String userId) {
+        List<Transaction> userTransactions = new ArrayList<Transaction>();
+        for (Transaction trans : transactions) {
+            if (trans.getReceivingUser().equals(userId)) {
+                userTransactions.add(trans);
+            }
+        }
+        return userTransactions;
+    }
+
+    public Transaction create(BigDecimal amount, String reference, String receivingUser) {
         ZonedDateTime timestamp = ZonedDateTime.now();
-        Transaction transaction = new Transaction(amount, timestamp, reference, bankSlogan);
+        Transaction transaction = new Transaction(amount, timestamp, reference, bankSlogan, receivingUser);
         transactions.add(transaction);
         return transaction;
     }

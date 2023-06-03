@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -20,6 +21,11 @@ import com.smthasa.mybank.ApplicationLauncher;
 public class MyBankConfiguration {
 
     @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
+    }
+
+    @Bean
     public ObjectMapper getObjectMapperBean() {
         return new ObjectMapper().registerModule(new JavaTimeModule());
     }
@@ -30,7 +36,7 @@ public class MyBankConfiguration {
         viewResolver.setTemplateEngine(templateEngine());
 
         viewResolver.setOrder(1);
-        viewResolver.setViewNames(new String[] {".html", ".xhtml"});
+        viewResolver.setViewNames(new String[] {"*.html", "*.xhtml"});
         return viewResolver;
     }
 
